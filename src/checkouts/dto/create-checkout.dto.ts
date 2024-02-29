@@ -1,3 +1,4 @@
+import { Type } from "class-transformer";
 import { ArrayNotEmpty, IsArray, IsInt, IsNotEmpty, IsPositive, ValidateNested } from "class-validator";
 
 export class CheckoutItemDto {
@@ -16,10 +17,10 @@ export class CheckoutItemDto {
 
 export class CreateCheckoutDto {
 
-    @IsNotEmpty()
     @IsArray()
     @ArrayNotEmpty()
     @ValidateNested({ each: true })
+    @Type(() => CheckoutItemDto)
     items: CheckoutItemDto[];
-    
+
 }
