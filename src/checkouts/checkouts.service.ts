@@ -16,14 +16,14 @@ export class CheckoutsService {
 	async create(createCheckoutDto: CreateCheckoutDto) {
 
 		const productIds = createCheckoutDto.items.map(item => item.product_id);
-		const products = PRODUCTS_LIST.filter(product => {
-			productIds.includes(product.id);
-		});
+		const products = PRODUCTS_LIST.filter(product => 
+			productIds.includes(product.id),
+		);
 
 		const checkout = Checkout.create({
 
 			items: createCheckoutDto.items.map(item => {
-				const product = products.find((product) => product.id === item.product_id);
+				const product = products.find(p => p.id === item.product_id);
 
 				return {
 
@@ -44,6 +44,7 @@ export class CheckoutsService {
 		});
 
 		await this.checkoutRepo.save(checkout);
+		return checkout;
 
 	}
 
