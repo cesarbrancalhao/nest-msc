@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { CheckoutsService } from './checkouts.service';
 import { CheckoutsController } from './checkouts.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Checkout, CheckoutItem, CheckoutProduct } from './entities/checkout.entity';
+import { Checkout } from './entities/checkout.entity';
+import { CheckoutItem } from './entities/checkout-item.entity';
+import { CheckoutProduct } from './entities/checkout-product.entity';
 
 @Module({
 

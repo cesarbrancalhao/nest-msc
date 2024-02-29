@@ -3,7 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CheckoutsModule } from './checkouts/checkouts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Checkout, CheckoutItem, CheckoutProduct } from './checkouts/entities/checkout.entity';
+import { Checkout } from './checkouts/entities/checkout.entity';
+import { CheckoutItem } from './checkouts/entities/checkout-item.entity';
+import { CheckoutProduct } from './checkouts/entities/checkout-product.entity';
 
 /* Decorator */
 @Module({ 

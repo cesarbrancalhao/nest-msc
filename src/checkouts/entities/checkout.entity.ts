@@ -7,6 +7,9 @@ import {
     PrimaryGeneratedColumn
 } from "typeorm";
 
+import { CheckoutProduct } from "./checkout-product.entity";
+import { CheckoutItem } from "./checkout-item.entity";
+
 export type CreateCheckoutCommand = {
 
     items: {
@@ -72,45 +75,5 @@ export class Checkout {
         return checkout;
 
     }
-
-}
-
-@Entity()
-export class CheckoutProduct {
-
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    name: string;
-
-    @Column()
-    description: string;
-
-    @Column()
-    image_url: string;
-
-    @Column()
-    product_id: number; /* Product ID from another microservice */
-
-}
-
-@Entity()
-export class CheckoutItem {
-
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column()
-    quantity: number;
-
-    @Column(/*{ type: 'decimal', precision: 5, scale: 2 }*/)
-    price: number;
-
-    @ManyToOne(() => Checkout)
-    checkout: Checkout;
-
-    @ManyToOne(() => CheckoutProduct)
-    product: CheckoutProduct;
 
 }
