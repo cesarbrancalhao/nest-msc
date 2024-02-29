@@ -3,6 +3,5 @@ export class CheckoutItemDto {
     product_id: number;
 };
 export class CreateCheckoutDto {
-    items: CheckoutItemDto;
-
+    items: CheckoutItemDto[];
 }

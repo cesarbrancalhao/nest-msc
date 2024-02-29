@@ -16,7 +16,8 @@ export type CreateCheckoutCommand = {
 
         quantity: number;
         price: number;
-        product: {
+        product: 
+        {
             name: string;
             description: string;
             image_url: string;
@@ -48,7 +49,7 @@ export class Checkout {
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(() => CheckoutItem, (item) => item.checkout)
+    @OneToMany(() => CheckoutItem, item => item.checkout)
     items: CheckoutItem[];
 
     static create(input: CreateCheckoutCommand) {

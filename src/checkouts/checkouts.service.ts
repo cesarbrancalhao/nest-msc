@@ -1,26 +1,65 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCheckoutDto } from './dto/create-checkout.dto';
 import { UpdateCheckoutDto } from './dto/update-checkout.dto';
+import PRODUCTS_LIST from 'constants/products-list';
+import { Checkout } from './entities/checkout.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class CheckoutsService {
-  create(createCheckoutDto: CreateCheckoutDto) {
-    return 'This action adds a new checkout';
-  }
 
-  findAll() {
-    return `This action returns all checkouts`;
-  }
+	constructor(
+		@InjectRepository(Checkout) private checkoutRepo: Repository<Checkout>
+	) {}
 
-  findOne(id: number) {
-    return `This action returns a #${id} checkout`;
-  }
+	async create(createCheckoutDto: CreateCheckoutDto) {
 
-  update(id: number, updateCheckoutDto: UpdateCheckoutDto) {
-    return `This action updates a #${id} checkout`;
-  }
+		const productIds = createCheckoutDto.items.map(item => item.product_id);
+		const products = PRODUCTS_LIST.filter(product => {
+			productIds.includes(product.id);
+		});
 
-  remove(id: number) {
-    return `This action removes a #${id} checkout`;
-  }
+		const checkout = Checkout.create({
+
+			items: createCheckoutDto.items.map(item => {
+				const product = products.find((product) => product.id === item.product_id);
+
+				return {
+
+					quantity: item.quantity,
+					price: product.price,
+					product: 
+					{
+						name: product.name,
+						description: product.description,
+						image_url: product.image_url,
+						product_id: product.id
+					}
+
+				};
+
+			}),
+
+		});
+
+		await this.checkoutRepo.save(checkout);
+
+	}
+
+	findAll() {
+		return `This action returns all checkouts`;
+	}
+
+	findOne(id: number) {
+		return `This action returns a #${id} checkout`;
+	}
+
+	update(id: number, updateCheckoutDto: UpdateCheckoutDto) {
+		return `This action updates a #${id} checkout`;
+	}
+
+	remove(id: number) {
+		return `This action removes a #${id} checkout`;
+	}
 }
