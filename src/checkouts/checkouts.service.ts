@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCheckoutDto } from './dto/create-checkout.dto';
-import { UpdateCheckoutDto } from './dto/update-checkout.dto';
 import PRODUCTS_LIST from 'constants/products-list';
 import { Checkout } from './entities/checkout.entity';
 import { Repository } from 'typeorm';
@@ -57,7 +56,7 @@ export class CheckoutsService {
 		return this.checkoutRepo.findOneByOrFail({
 			id,
 		});
-		
+
 	}
 
 	async pay(id: number){
