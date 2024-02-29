@@ -53,7 +53,9 @@ export class CheckoutsService {
 	}
 
 	findOne(id: number) {
-		return `This action returns a #${id} checkout`;
+		return this.checkoutRepo.findOneByOrFail({
+			id,
+		});
 	}
 
 	update(id: number, updateCheckoutDto: UpdateCheckoutDto) {
