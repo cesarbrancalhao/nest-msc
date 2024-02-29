@@ -23,9 +23,10 @@ export class CheckoutItem {
     @ManyToOne(() => Checkout)
     checkout: Checkout;
 
-    @ManyToOne(() => CheckoutProduct,{
-        cascade: ['insert'],
-    })
+    @ManyToOne(() => CheckoutProduct, {
+            cascade: ['insert'],
+            eager: true,
+        })
     product: CheckoutProduct;
 
 }

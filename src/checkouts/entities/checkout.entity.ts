@@ -50,8 +50,9 @@ export class Checkout {
     created_at: Date;
 
     @OneToMany(() => CheckoutItem, item => item.checkout, {
-        cascade: ['insert'],
-    })
+            cascade: ['insert'],
+            eager: true,
+        })
     items: CheckoutItem[];
 
     static create(input: CreateCheckoutCommand) {

@@ -49,7 +49,7 @@ export class CheckoutsService {
 	}
 
 	findAll() {
-		return `This action returns all checkouts`;
+		return this.checkoutRepo.find();
 	}
 
 	findOne(id: number) {
