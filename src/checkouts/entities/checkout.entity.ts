@@ -80,4 +80,27 @@ export class Checkout {
 
     }
 
+    pay() {
+
+        if(this.status === CheckoutStatus.COMPLETED)
+            throw new Error('checkout already paid');
+
+        if(this.status === CheckoutStatus.CANCELLED)
+        throw new Error('checkout failed');
+
+        this.status = CheckoutStatus.COMPLETED;
+    }
+
+    cancel() {
+
+        if(this.status === CheckoutStatus.CANCELLED)
+        throw new Error('checkout failed');
+        
+        if(this.status === CheckoutStatus.COMPLETED)
+            throw new Error('checkout already paid');
+
+        this.status = CheckoutStatus.CANCELLED;
+
+    }
+
 }

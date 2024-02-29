@@ -1,34 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { CheckoutsService } from './checkouts.service';
 import { CreateCheckoutDto } from './dto/create-checkout.dto';
 import { UpdateCheckoutDto } from './dto/update-checkout.dto';
 
 @Controller('checkouts')
 export class CheckoutsController {
-  constructor(private readonly checkoutsService: CheckoutsService) {}
 
-  @Post()
-  create(@Body() createCheckoutDto: CreateCheckoutDto) {
-    return this.checkoutsService.create(createCheckoutDto);
-  }
+	constructor(private readonly checkoutsService: CheckoutsService) {}
 
-  @Get()
-  findAll() {
-    return this.checkoutsService.findAll();
-  }
+	@Post()
+	create(@Body() createCheckoutDto: CreateCheckoutDto) {
+		return this.checkoutsService.create(createCheckoutDto);
+	}
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.checkoutsService.findOne(+id);
-  }
+	@Get()
+	findAll() {
+		return this.checkoutsService.findAll();
+	}
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCheckoutDto: UpdateCheckoutDto) {
-    return this.checkoutsService.update(+id, updateCheckoutDto);
-  }
+	@Get(':id')
+	findOne(@Param('id') id: string) {
+		return this.checkoutsService.findOne(+id);
+	}
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.checkoutsService.remove(+id);
-  }
+	@Put(':id/pay')
+	pay(@Param('id') id: string) {
+		return this.checkoutsService.pay(+id);
+	}
+
+	@Put(':id/cancel')
+	cancel(@Param('id') id: string) {
+		return this.checkoutsService.cancel(+id);
+	}
+
 }
